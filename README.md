@@ -1,7 +1,25 @@
 # BalanceadorDeCargaConApache - Antonio Cruz Clavel - 06/12/2023
-# 1. Esquema
+# Índice.
+1. Esquema.
+2. Descripción.
+3. Creación VPC's
+4. Creación instancias.
+   * 4.1 Balanceador de carga.
+   * 4.2 Servidores apache.
+   * 4.3 BBDD MYSQL.
+   * 4.4 Pivote ssh balancer.
+5. Configuraciones.
+   * 5.1 Balanceador de carga.
+   * 5.2 Servidores Apache.
+   * 5.3 BBDD MYSQL
+6. Grupos de seguridad.
+   * 6.1 Balanceador de carga.
+   * 6.2 Servidores Apache.
+   * 6.3 BBDD MYSQL.
+
+# 1. Esquema.
 ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/Esquema%20proyecto.png)
-# 2. Descripción
+# 2. Descripción.
 Esta práctica se basa en el montaje de una pila LAMP en tres niveles con instancias EC2 de AWS.
 
 Una pila LAMP es un conjunto de software de código abierto utilizado para desarrollar y ejecutar aplicaciones web. El acrónimo LAMP se refiere a los componentes principales de esta pila:
@@ -42,7 +60,7 @@ Así pues este es el esquema VPC obtenido:
 
 # 4. Creación instancias.
  Las 4 instancias necesarias (1 instancia que actúe como balanceador de cargas, 2 máquinas apaches y 1 máquina BBDD MYSQL) se configurarán de la siguiente manera:
- ## 4.1 Balanceador de cargas
+ ## 4.1 Balanceador de cargas.
  ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/Instanciabalanceador1.png)
 
  ## 4.2 Servidores Apache  
@@ -50,7 +68,7 @@ Así pues este es el esquema VPC obtenido:
  ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/instancia%20apache1nombre.png)
  ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/instanciapache1configuraciondered.png)  
 
- ## 4.3 BBDD MYSQL
+ ## 4.3 BBDD MYSQL.
 Se creará igual que los servidores apache asignándole la subred privada.  
 
 Tal y como se muestra en las capturas anteriores los campos a modificar son los siguientes:
@@ -59,20 +77,20 @@ Tal y como se muestra en las capturas anteriores los campos a modificar son los 
 * **Par de Claves**: Vockey
 * **Configuración de red**: Se asignará la subred privada a los servidores de backend (apaches y BBDD SQL) y la subred pública al balanceador. No se le otorgará una IP pública temporal a las instancias.
 
-## 4.4 Pivote ssh balancer
+## 4.4 Pivote ssh balancer.
 Al no asignar una IP pública temporal a las instancias previamente se necesita una manera de acceder a ellas. Para ello en esta práctica se crea una instancia temporal llamada **"pivote ssh balancer"** que facilitará el movimiento entre las máquinas, por lo tanto a esta instancia si se le otorga una IP pública temporal.
-  ### Comandos útiles
+  ### Comandos útiles.
   Para mover el certificado a la **máquina pivote**: `scp -i labsuser.pem labsuser.pem admin@10.0.5.4`  
   Cambiar nombre al hostname de las máquinas: `sudo hostnamectl set-hostname Apache1`  
   Cambiar los permisos y validar el certificado: `chmod go-r labsuser.pem`  
 
-  # 5. Configuraciones
+  # 5. Configuraciones.
   ## 5.1 Balanceador de carga.
   En primer lugar se le asigna una dirección IP pública elástica que previamente creamos, ya que el balanceador será la máquina por la que podamos entrar a nuestro servidor backend.
   Para ello tan solo hay que ir a **Direcciones IP elásticas** en el menú *Red y seguridad* y pinchar en *Asociar una dirección IP elástica*.
-  *Dentro del menú no hará falta editar ningún parámetro*  
+  *Dentro del menú no hará falta editar ningún parámetro*.   
   ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/ipelastica.png)  
-   Luego habrá que asociar la IP elástica que hemos creado a la instancia **balanceador de carga**  
+   Luego habrá que asociar la IP elástica que hemos creado a la instancia **balanceador de carga**.  
 
    Una vez dentro de nuestra máquina hay que:
    * Instalar apache. `sudo apt install apache2`
@@ -193,4 +211,5 @@ Puerto 80 abierto para comunicarse con el balanceador y puerto 3306(MYSQL) abier
 ## 6.3 BBDD MYSQL. 
 ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/GSBBDD.png)
 Puerto 3306(MYSQL) abierto.
+
 
