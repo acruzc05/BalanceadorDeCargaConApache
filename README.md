@@ -16,6 +16,7 @@
    * 6.1 Balanceador de carga.
    * 6.2 Servidores Apache.
    * 6.3 BBDD MYSQL.
+7. Screencash
 
 # 1. Esquema.
 ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/Esquema%20proyecto.png)
