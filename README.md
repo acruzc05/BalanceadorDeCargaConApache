@@ -183,3 +183,14 @@ Comprobar que se puede acceder desde una maquina apache con el usuario antonio a
 
 **IMPORTANTE**: CUIDADO AL USAR carácteres especiales en el usuario/contraseña ya que estos dan problemas a la hora de conectarse al servidor MYSQL de forma remota.
 
+# 6. Grupos de seguridad
+## 6.1 Balanceador de carga.
+![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/GSBalanceador.png)  
+Puerto 443 abierto para comunicarse con internet y puerto 80 abierto para comunicarse con los servidores apache.  
+## 6.2 Servidores Apache. 
+![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/GSServidoresApache.png)
+Puerto 80 abierto para comunicarse con el balanceador y puerto 3306(MYSQL) abierto para comunicarse con la BBDD.
+## 6.3 BBDD MYSQL. 
+![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/GSBBDD.png)
+Puerto 3306(MYSQL) abierto.
+
