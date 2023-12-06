@@ -212,4 +212,6 @@ Puerto 80 abierto para comunicarse con el balanceador y puerto 3306(MYSQL) abier
 ![](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/GSBBDD.png)
 Puerto 3306(MYSQL) abierto.
 
+# 7. Screencash
+[Pincha aquí para obtener el screencash](https://github.com/acruzc05/BalanceadorDeCargaConApache/blob/main/Screencash.mp4) donde se aprecia el funcionamiento de la aplicación desplegada. 
 
